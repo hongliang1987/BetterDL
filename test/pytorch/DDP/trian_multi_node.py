@@ -31,7 +31,7 @@ def train():
     while True:
         print(f"[{os.getpid()}] (rank = {rank}, local_rank = {local_rank}) training...")
         model = ToyModel().cuda(local_rank)
-        ddp_model = DDP(model, [local_rank])
+        ddp_model = DDP(model, [rank])
 
         loss_fn = nn.MSELoss()
         optimizer = optim.SGD(ddp_model.parameters(), lr=0.001)
